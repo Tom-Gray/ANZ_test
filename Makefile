@@ -23,8 +23,11 @@ test:
 	  --target build \
 	  -t $(APP) . 
 
+
 publish:
-	docker push $(APP):$(VERSION) $(REPO)/$(APP):$(VERSION)
-	docker tag $(APP):$(VERSION) $(APP):latest
-	docker push $(APP):latest $(REPO)/$(APP):latest
+	docker tag $(APP):$(VERSION) $(REPO)/$(APP):$(VERSION)
+	docker push $(REPO)/$(APP):$(VERSION)
+	docker tag $(APP):$(VERSION) $(REPO)/$(APP):latest
+	docker push $(REPO)/$(APP):latest
+	
 

@@ -18,18 +18,15 @@ jobs:
       id: tag
       uses: dawidd6/action-get-tag@v1
     
-    - name: echo tag
-      run: echo "Building image with version ${{steps.tag.outputs.tag}}"
-
-    - name: build release image
+    - name: Build Release Image
       env:
         VERSION: ${{steps.tag.outputs.tag}}
       run: make docker-build
 
-    - name: Login to Docker Hub
+    - name: Login to Docker Registry
       run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
 
-    - name: tag and publish image
+    - name: Tag and Publish Image
       env:
         VERSION: ${{steps.tag.outputs.tag}}
       run: make publish
