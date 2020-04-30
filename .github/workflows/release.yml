@@ -26,6 +26,11 @@ jobs:
         VERSION: ${{steps.tag.outputs.tag}}
       run: make docker-build
 
+    - name: Login to Docker Hub
+      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+
     - name: tag and publish image
+      env:
+        VERSION: ${{steps.tag.outputs.tag}}
       run: make publish
 
