@@ -1,4 +1,4 @@
-from .test_fixpathing import app
+from test_fixpathing import app
 from app import app
 
 #from app import responder

@@ -2,8 +2,9 @@ FROM python:3.7 as build
 
 WORKDIR /build
 
-COPY app tests /build/
-RUN pip install -r /build/requirements-dev.txt
+COPY . /build/
+
+RUN pip install -r /build/app/requirements-dev.txt
 
 RUN pytest
 RUN pycodestyle /build/
