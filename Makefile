@@ -13,7 +13,7 @@ docker-build:
 	  -t $(APP):$(VERSION) .    
 
 run:
-	docker run -detach -p5000:5000 $(APP)  
+	docker run -detach -p5000:5000 $(APP):$(VERSION)
 
 # only execute the 'build' stage of the docker image
 test:
