@@ -3,7 +3,8 @@ Basic Python/Flash app to return data on /version
 """
 import os
 from flask import Flask, jsonify
-from responder import make_response
+from .responder import make_response
+
 
 APP = Flask(__name__)
 

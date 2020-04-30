@@ -1,5 +1,7 @@
+from .test_fixpathing import app
 from app import app
-from app import responder
+
+#from app import responder
 import os
 
 import pytest
