@@ -2,9 +2,10 @@ FROM python:3.7 as build
 
 WORKDIR /build
 
-COPY app /build/
+COPY app tests /build/
 RUN pip install -r /build/requirements-dev.txt
 
+RUN pytest
 RUN pycodestyle /build/
 RUN pylint /build
 RUN safety check
