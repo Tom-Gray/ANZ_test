@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build the Docker image
+    - name: Build Docker Image and Run Tests
       run: make docker-build
 
     - name: Run the Docker image
