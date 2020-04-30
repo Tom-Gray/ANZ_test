@@ -39,7 +39,7 @@ The release pipeline expects the tags to be in this format: version0.0.0
 
 Use `git tag` to create a version:
 
-`git tag Version0.1.0 && git push --tags`
+`git tag version1.0.1 && git push --tags`
 
 ## Deploying
 
