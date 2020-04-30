@@ -9,7 +9,7 @@ APP = Flask(__name__)
 
 
 @APP.route('/version')
-def version():
+def main():
     """
     Returns version details to the caller
     """
