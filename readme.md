@@ -8,6 +8,8 @@ a description string which I've hardcoded.
 
 Github Actions will run a build & test on any push to a branch, giving immediate feedback about the 
 proposed changes. 
+Tests are run in a Test stage of a Docker multistage build. Any test or linting failure will stop the 
+container build.
 
 A PR can be made to merge the branch to master. This PR cannot be approved unless the branch build is
 successful. 
@@ -21,7 +23,7 @@ The pipeline runs the following tests during image build:
 - dependency security scan (safety check)
 
 Once the image build is complete and the image has been created, a CI step will launch the image and 
-test the /version endpoint to ensure it responds. A non-200 response will fail the build.
+test the /version endpoint to ensure it responds. A non-200 response will fail the build. 
 
 
 ## Versioning
@@ -34,10 +36,16 @@ Use `git tag` to create a version:
 
 `git tag Version0.1.0 && git push --tags`
 
+## Deploying
 
-## Risks and Steps to Productionise 
+The app can be run using
 
-- docker build would be a seperately maintained base image
-- testing improvements
-- We are assuming the appropriate variables are available to the app. 
-- for imrpoved local testing I'd like to use a volume mount to mount the files to the docker container
+`docker run -p5000:5000 -t docker.pkg.github.com/tom-gray/anz_test/anz_test:latest`
+
+
+
+## Risks 
+
+- Ideally I would like to make the base image a seperately built and maintained image that other images could build from.
+- We are assuming the appropriate variables are available to the app. We should have some checks and decide how the app should behave if they dont exist or are not the expected format.
+- local testing could be improved by launching a container with a volume mount to the applicaiton directory. This way a developer would be able to run a test by running a container instead of having to build the entire container each time they want to run the test suite.
