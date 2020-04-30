@@ -2,11 +2,13 @@ FROM python:3.7 as build
 
 WORKDIR /build
 
-COPY app /build/
-RUN pip install -r /build/requirements-dev.txt
+COPY . /build/
 
-RUN pycodestyle /build/
-RUN pylint /build
+RUN pip install -r /build/app/requirements-dev.txt
+
+RUN pytest --verbose
+RUN pycodestyle /build/app
+RUN pylint /build/app
 RUN safety check
 
 FROM python:3.7.3-alpine3.10  as application

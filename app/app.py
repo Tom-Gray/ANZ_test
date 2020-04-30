@@ -3,13 +3,14 @@ Basic Python/Flash app to return data on /version
 """
 import os
 from flask import Flask, jsonify
-from responder import make_response
+from .responder import make_response
+
 
 APP = Flask(__name__)
 
 
 @APP.route('/version')
-def version():
+def main():
     """
     Returns version details to the caller
     """
