@@ -25,4 +25,4 @@ jobs:
         --max-time 10 \
         --retry 5 \
         --retry-delay 0 \
-        --retry-max-time 40 http://localhost:5000/
+        --retry-max-time 40 http://localhost:5000/version
