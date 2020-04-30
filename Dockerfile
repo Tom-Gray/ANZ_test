@@ -5,10 +5,9 @@ WORKDIR /build
 COPY app /build/
 RUN pip install -r /build/requirements-dev.txt
 
-RUN  pwd;pycodestyle /build/
+RUN pycodestyle /build/
 RUN pylint /build
-
-
+RUN safety check
 
 FROM python:3.7.3-alpine3.10  as application
 ARG COMMIT_SHA
