@@ -26,11 +26,15 @@ Once the image build is complete and the image has been created, a CI step will 
 test the /version endpoint to ensure it responds. A non-200 response will fail the build. 
 
 
+Developers can run `make test` from their workstation to run a local build and test operation.
+
+
 ## Versioning
 
 Version releases are created when the master branch is tagged with a version number. Tags will trigger
 Github Actions to execute the Publish workflow which will build the image with the appropriate version 
 and hash identifier. The image is tagged latest and pushed to the Github docker registry.
+
 
 Use `git tag` to create a version:
 
@@ -47,5 +51,9 @@ The app can be run using
 ## Risks 
 
 - Ideally I would like to make the base image a seperately built and maintained image that other images could build from.
+- We're utilising a lot of public services. Code, docker images, packages and build-runners (agents) should all be brought in-house to improve security. 
 - We are assuming the appropriate variables are available to the app. We should have some checks and decide how the app should behave if they dont exist or are not the expected format.
-- local testing could be improved by launching a container with a volume mount to the applicaiton directory. This way a developer would be able to run a test by running a container instead of having to build the entire container each time they want to run the test suite.
+- Security tests are limited to Dependeny checks and PR revewiers. There's no automated code analysis currently which is something to consider. 
+- local testing could be improved by launching a container with a volume mount to the applicaiton directory. This way a developer would be able to run a test by running a container instead of having to build the entire container each time they want to run the test suite. We need to keep those devs happy and productive. We can't have them waiting for things.
+- The app in it's current form has no state so it will be simple to scale out to protect againts failures and to provide additional capacity if traffic increases. A scheduler such as Kubernetes could handle this for us.
+- While Flask is running in "Production" mode, it is not designed to recieve production-like requests. It would be necessary to spend some effort on introducing a WSGI such as Gunicorn to properly route traffic to and from the API. Employing a reverse proxy such as NGINX should also be considered.
