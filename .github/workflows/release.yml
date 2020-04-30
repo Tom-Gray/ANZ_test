@@ -24,3 +24,8 @@ jobs:
     - name: echo tag
       run: echo "Building image with version ${{steps.tag.outputs.tag}}"
 
+    - name: build release image
+      env:
+        VERSION: ${{steps.tag.outputs.tag}}
+      run: make docker-build ${{steps.tag.outputs.tag}}
+
