@@ -26,8 +26,8 @@ Once the image build is complete and the image has been created, a CI step will 
 test the /version endpoint to ensure it responds. A non-200 response will fail the build. 
 
 
-Developers can run `make test` from their workstation to run a local build and test operation.
-
+Developers can run `make test`* from their workstation to run a local build and test operation. 
+*Note that this only executes the tests, it does not create a usable container image. 
 
 ## Versioning
 
@@ -43,10 +43,13 @@ Use `git tag` to create a version:
 
 ## Deploying
 
-The app can be run using
+The app can be run using:
 
 `docker run -p5000:5000 -t docker.pkg.github.com/tom-gray/anz_test/anz_test:latest`
 
+or deploy a specific version. This example deploys version1.0.1 (See the the section on Versioning)
+
+`docker run -p5000:5000 -t docker.pkg.github.com/tom-gray/anz_test/anz_test:version1.0.1`
 
 
 ## Risks 
