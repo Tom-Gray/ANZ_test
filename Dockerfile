@@ -6,9 +6,9 @@ COPY . /build/
 
 RUN pip install -r /build/app/requirements-dev.txt
 
-RUN pytest
-RUN pycodestyle /build/
-RUN pylint /build
+RUN pytest --verbose
+RUN pycodestyle /build/app
+RUN pylint /build/app
 RUN safety check
 
 FROM python:3.7.3-alpine3.10  as application
