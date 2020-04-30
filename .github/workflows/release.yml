@@ -26,3 +26,6 @@ jobs:
         VERSION: ${{steps.tag.outputs.tag}}
       run: make docker-build
 
+    - name: tag and publish image
+      run: make publish
+
